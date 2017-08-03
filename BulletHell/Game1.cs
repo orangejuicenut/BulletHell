@@ -11,11 +11,13 @@ namespace BulletHell
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        EntityManager manager;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            manager = new EntityManager();
         }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace BulletHell
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            manager.Initialize();
             base.Initialize();
         }
 
@@ -62,7 +64,10 @@ namespace BulletHell
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+
+            manager.Update(gameTime);
+
+           
 
             base.Update(gameTime);
         }
@@ -75,7 +80,9 @@ namespace BulletHell
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            manager.Draw(gameTime);
+
+           
 
             base.Draw(gameTime);
         }
