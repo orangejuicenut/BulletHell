@@ -12,6 +12,10 @@ namespace BulletHell
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         EntityManager manager;
+        Player player;
+        Wall wall;
+
+        private SpriteFont font;
 
         public Game1()
         {
@@ -42,6 +46,19 @@ namespace BulletHell
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+
+            Texture2D wallText = Content.Load<Texture2D>("bricks");
+            Texture2D playerText = Content.Load<Texture2D>("Lonk4");
+
+            player = new Player(playerText, new Point(10, 10));
+            wall = new Wall(new Rectangle(100, 250, 300, 100), wallText);
+            font = Content.Load<SpriteFont>("Yay");
+
+            manager.dynamicEntities.Add(player);
+            manager.staticEntities.Add(wall);
+
+
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -67,7 +84,7 @@ namespace BulletHell
 
             manager.Update(gameTime);
 
-           
+
 
             base.Update(gameTime);
         }
@@ -78,11 +95,30 @@ namespace BulletHell
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+
+            int lonkX0 = player.HitBox.Left;
+            int lonkX1 = player.HitBox.Right;
+            int lonkY0 = player.HitBox.Top;
+            int lonkY1 = player.HitBox.Bottom;
+
+
+            int wallX0 = wall.HitBox.Left;
+            int wallX1 = wall.HitBox.Right;
+            int wallY0 = wall.HitBox.Top;
+            int wallY1 = wall.HitBox.Bottom;
+
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(samplerState : SamplerState.PointClamp);
+            manager.Draw(spriteBatch);
 
-            manager.Draw(gameTime);
+            spriteBatch.DrawString(font, "lonkX0 <= wallX1 :" + (lonkX0 <= wallX1), new Vector2(250, 0), Color.Black);
+            spriteBatch.DrawString(font, "wallX0 <= lonkX1 :" + (wallX0 <= lonkX1), new Vector2(250, 14), Color.Black);
+            spriteBatch.DrawString(font, "lonkY0 <= wallY1 :" + (lonkY0 <= wallY1), new Vector2(250, 28), Color.Black);
+            spriteBatch.DrawString(font, "wallY0 <= lonkY1 :" + (wallY0 <= lonkY1), new Vector2(250, 42), Color.Black);
 
-           
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

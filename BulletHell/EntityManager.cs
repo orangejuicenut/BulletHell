@@ -4,18 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BulletHell
 {
     public class EntityManager
     {
 
-        List<IEntity> staticEntities;
-        List<IEntity> dynamicEntities;
+        public List<IEntity> staticEntities { get; set; }
+        public List<IEntity> dynamicEntities { get; set; }
 
         public EntityManager()
         {
-            
+            staticEntities = new List<IEntity>();
+            dynamicEntities = new List<IEntity>();
+
         }
         public void Initialize()
         {
@@ -24,24 +27,26 @@ namespace BulletHell
 
         public void Update(GameTime time)
         {
-            foreach(IEntity entity in dynamicEntities)
+            foreach (IEntity entity in dynamicEntities)
             {
                 entity.Update(time);
             }
             CollisionManager.HandleCollisions(staticEntities, dynamicEntities);
-            
+
         }
 
-        public void Draw(GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(IEntity entity in staticEntities)
+           
+            foreach (IEntity entity in staticEntities)
             {
-                entity.Draw(time);
+                entity.Draw(spriteBatch);
             }
-            foreach(IEntity entity in dynamicEntities)
+            foreach (IEntity entity in dynamicEntities)
             {
-                entity.Draw(time);
+                entity.Draw(spriteBatch);
             }
+            
         }
 
     }

@@ -43,14 +43,15 @@
   <ItemGroup>
     <Compile Include="CollisionManager.cs" />
     <Compile Include="EntityManager.cs" />
-    <Compile Include="EntityType.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="ICollidable.cs" />
     <Compile Include="ICollisionBehavior.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerCollisionBehavior.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wall.cs" />
+    <Compile Include="WallCollisionBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

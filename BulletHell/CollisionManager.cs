@@ -12,22 +12,22 @@ namespace BulletHell
         {
             for (int i = 0; i < dynamicObjects.Count; i++)
             {
-                ICollidable obj1 = dynamicObjects[i];
+                IEntity obj1 = dynamicObjects[i];
                 for (int j = i + 1; j < dynamicObjects.Count; j++)
                 {
-                    ICollidable obj2 = dynamicObjects[j];
+                    IEntity obj2 = dynamicObjects[j];
                     HandleSingleCollision(obj1, obj2);
                 }
                 for (int j = 0; j < staticObjects.Count; j++)
                 {
-                    ICollidable obj2 = staticObjects[j];
+                    IEntity obj2 = staticObjects[j];
                     HandleSingleCollision(obj1, obj2);
                 }
             }
         }
 
 
-        public static void HandleSingleCollision(ICollidable obj1, ICollidable obj2)
+        public static void HandleSingleCollision(IEntity obj1, IEntity obj2)
         {
             if (DetectCollisions(obj1, obj2))
             {
@@ -37,7 +37,7 @@ namespace BulletHell
         }
 
 
-        public static bool DetectCollisions(ICollidable obj1, ICollidable obj2)
+        public static bool DetectCollisions(IEntity obj1, IEntity obj2)
         {
             return obj1.HitBox.Intersects(obj2.HitBox);
         }

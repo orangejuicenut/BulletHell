@@ -3,9 +3,9 @@
     public interface ICollisionBehavior
     {
 
-        IEntity self { get; set; }
+        IEntity self { get; }
 
-        void DoCollision(ICollidable collidee);
+        void DoCollision(IEntity collidee);
 
 
     }
